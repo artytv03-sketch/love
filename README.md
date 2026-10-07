@@ -22,21 +22,26 @@ Render раздаёт статику через глобальный CDN с бе
 `index.html`, `styles.css`, `script.js` и `render.yaml` — все в корне.
 
 **Шаг 2. Создайте Static Site** в [Render Dashboard](https://dashboard.render.com/):
-*New → Static Site* → подключите репозиторий.
 
-Если репозиторий содержит `render.yaml`, Render подхватит настройки сам. Иначе укажите вручную:
+1. Раздел *Account Settings* → *Git Deployment Credentials* → **Add credential**,
+   авторизуйте Render под своим GitHub-аккаунтом.
+2. *New → Static Site* → выберите репозиторий `artytv03-sketch/love`.
+3. Проверьте поля (в `render.yaml` они уже описаны, но их видно и в форме):
 
 | Поле | Значение |
 | --- | --- |
+| Name | `uliana-letter` |
+| Branch | `main` |
 | Build Command | `exit 0` |
 | Publish Directory | `./` |
 | Environment | `SKIP_INSTALL_DEPS` = `true` |
 
-Через пару минут сайт будет доступен по адресу вида `https://uliana-letter.onrender.com`.
+4. **Create Static Site**.
 
-Каждый `git push` в ветку `main` пересобирает сайт автоматически.
+Через 1–2 минуты сайт откроется по адресу `https://uliana-letter.onrender.com`.
+Каждый `git push` в `main` деплоит обновления автоматически.
 
-Свои заголовки безопасности и политику кеширования можно задать в `render.yaml` (раздел `headers`).
+Заголовки безопасности из `render.yaml` применятся сами — вручную их задавать не нужно.
 
 ## Сцены
 
