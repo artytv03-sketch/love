@@ -1,0 +1,33 @@
+# Render Blueprint — статический сайт
+# Документация: https://render.com/docs/blueprint-spec
+
+services:
+  - type: web
+    runtime: static
+    name: uliana-letter
+    branch: main
+
+    # Собирать нечего: три статических файла лежат в корне репозитория.
+    # Render требует buildCommand, поэтому ставим команду-пустышку.
+    buildCommand: exit 0
+
+    # публикуем корень репозитория как есть
+    staticPublishPath: ./
+
+    autoDeployTrigger: commit
+
+    # зависимостей нет — не тратим минуты пайплайна на их установку
+    envVars:
+      - key: SKIP_INSTALL_DEPS
+        value: "true"
+
+    headers:
+      - path: /*
+        name: X-Content-Type-Options
+        value: nosniff
+      - path: /*
+        name: Referrer-Policy
+        value: no-referrer
+      - path: /*
+        name: X-Frame-Options
+        value: sameorigin

@@ -1,0 +1,6 @@
+# для веб-файлов всегда LF — иначе CDN-кеш и деплой ведут себя непредсказуемо
+*.html text eol=lf
+*.css text eol=lf
+*.js text eol=lf
+*.yaml text eol=lf
+*.md text eol=lf

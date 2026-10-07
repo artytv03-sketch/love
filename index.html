@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#080204">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="Маленькая интерактивная сцена-п письмо, написанное специально для Ульяны.">
+  <title>Для одной очень красивой девушки по имени Ульяна.</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='15' fill='%23c2102f'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='18' font-style='italic' fill='%23f7e9eb' text-anchor='middle'%3EU%3C/text%3E%3C/svg%3E">
+  <script>document.documentElement.classList.add("js");</script>
+</head>
+<body>
+
+  <!-- ══════════════ ФОН: свечение · дым · виньетка · зерно ══════════════ -->
+  <div class="backdrop" aria-hidden="true">
+    <div class="backdrop__glow backdrop__glow--core"></div>
+    <div class="backdrop__glow backdrop__glow--bloom"></div>
+    <div class="backdrop__smoke backdrop__smoke--a"></div>
+    <div class="backdrop__smoke backdrop__smoke--b"></div>
+    <div class="backdrop__smoke backdrop__smoke--c"></div>
+    <!-- дым от кальяна: каждый клуб — набор пятен, собирающихся снизу вверх -->
+    <div class="backdrop__embers">
+      <span style="--x:8%;  --y:78%; --d:19s; --delay:-4s;  --s:3px"></span>
+      <span style="--x:22%; --y:88%; --d:24s; --delay:-11s; --s:2px"></span>
+      <span style="--x:38%; --y:70%; --d:17s; --delay:-7s;  --s:2px"></span>
+      <span style="--x:57%; --y:92%; --d:26s; --delay:-15s; --s:3px"></span>
+      <span style="--x:71%; --y:76%; --d:21s; --delay:-2s;  --s:2px"></span>
+      <span style="--x:86%; --y:86%; --d:18s; --delay:-9s;  --s:2px"></span>
+      <span style="--x:46%; --y:58%; --d:29s; --delay:-19s; --s:2px"></span>
+      <span style="--x:92%; --y:62%; --d:23s; --delay:-13s; --s:2px"></span>
+    </div>
+    <div class="backdrop__vignette"></div>
+
+    <!-- дым от кальяна: струя снизу распадается на медленные клубы -->
+    <div class="backdrop__plumes">
+      <div class="plume plume--puffA">
+        <i style="--w:230px;--h:150px;--o:.72;--dx:-34px;--dy:-52px;--r:-7deg"></i>
+        <i style="--w:180px;--h:118px;--o:.56;--dx:28px;--dy:-142px;--r:5deg"></i>
+        <i style="--w:132px;--h:88px;--o:.4;--dx:-18px;--dy:-242px;--r:-3deg"></i>
+      </div>
+      <div class="plume plume--puffB">
+        <i style="--w:268px;--h:172px;--o:.6;--dx:46px;--dy:-46px;--r:8deg"></i>
+        <i style="--w:208px;--h:132px;--o:.46;--dx:-38px;--dy:-128px;--r:-6deg"></i>
+        <i style="--w:148px;--h:96px;--o:.34;--dx:26px;--dy:-218px;--r:4deg"></i>
+      </div>
+      <div class="plume plume--puffC">
+        <i style="--w:180px;--h:114px;--o:.55;--dx:-26px;--dy:-50px;--r:6deg"></i>
+        <i style="--w:140px;--h:90px;--o:.42;--dx:34px;--dy:-130px;--r:-5deg"></i>
+        <i style="--w:104px;--h:68px;--o:.28;--dx:-18px;--dy:-208px;--r:3deg"></i>
+      </div>
+      <div class="plume plume--puffD">
+        <i style="--w:320px;--h:206px;--o:.36;--dx:54px;--dy:-62px;--r:9deg"></i>
+        <i style="--w:240px;--h:156px;--o:.26;--dx:-46px;--dy:-162px;--r:-7deg"></i>
+      </div>
+      <div class="plume plume--column">
+        <i style="--w:76px;--h:104px;--o:.9;--dx:0px;--dy:-10px;--r:0deg"></i>
+        <i style="--w:58px;--h:84px;--o:.7;--dx:-12px;--dy:-36px;--r:-4deg"></i>
+        <i style="--w:44px;--h:64px;--o:.5;--dx:10px;--dy:-60px;--r:3deg"></i>
+      </div>
+    </div>
+
+    <div class="backdrop__grain"></div>
+    <div class="backdrop__burst" id="backdropBurst"></div>
+  </div>
+
+
+  <main class="stage" id="stage">
+
+    <!-- ══════════════ ЭКРАН 1 · КОНВЕРТ ══════════════ -->
+    <section class="screen screen--intro is-active" id="screen-intro" aria-label="Конверт">
+      <div class="screen__inner">
+
+        <div class="envelope-wrap">
+          <div class="envelope" id="envelope" role="img" aria-label="Запечатанный конверт с красной печатью в виде буквы U">
+            <div class="envelope__body"></div>
+            <div class="envelope__letter" aria-hidden="true"></div>
+            <div class="envelope__flap" aria-hidden="true"></div>
+            <div class="envelope__pocket" aria-hidden="true"></div>
+            <div class="envelope__seal" aria-hidden="true">U</div>
+          </div>
+        </div>
+
+        <div class="intro-copy">
+          <p class="eyebrow reveal" style="--i:0">Private delivery · 01</p>
+          <p class="intro-copy__to reveal" style="--i:1">Для одной очень красивой девушки по имени Ульяна.</p>
+
+          <h1 class="display reveal" style="--i:2">
+            Один ваш тайный фанат<br>
+            <em>прислал вам конверт.</em>
+          </h1>
+
+          <p class="lead reveal" style="--i:3">Интересно, что внутри?</p>
+
+          <div class="actions reveal" style="--i:4">
+            <button class="btn btn--primary" id="openLetter" type="button">
+              <span>Открыть письмо</span>
+            </button>
+
+            <button class="btn btn--refuse" id="refuseBtn" type="button">
+              Не хочу читать
+            </button>
+          </div>
+
+          <p class="tease" id="tease" role="status" aria-live="polite"></p>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ══════════════ ЭКРАН 2 · ПИСЬМО ══════════════ -->
+    <section class="screen screen--letter" id="screen-letter" aria-label="Письмо" hidden inert>
+      <div class="screen__inner">
+        <article class="letter">
+          <p class="eyebrow letter__eyebrow">Letter · 02</p>
+
+          <h2 class="letter__greeting">Ульяна,</h2>
+
+          <p class="letter__p">Я думал, как сказать тебе некоторые вещи, и решил, что обычное сообщение — слишком просто.</p>
+          <p class="letter__p">Поэтому пусть сегодня всё то, что я хочу передать, скажет этот сайт.</p>
+
+          <span class="divider" aria-hidden="true"></span>
+
+          <p class="letter__note">Слова ниже — без пафоса. Просто несколько мыслей, которые мне хотелось оставить именно тебе.</p>
+
+          <button class="btn btn--primary btn--wide" id="toCompliments" type="button">
+            <span>Продолжить</span>
+          </button>
+        </article>
+      </div>
+    </section>
+
+
+    <!-- ══════════════ ЭКРАН 3 · КОМПЛИМЕНТЫ ══════════════ -->
+    <section class="screen screen--cards" id="screen-cards" aria-label="Четыре мысли" hidden inert>
+      <div class="screen__inner">
+
+        <p class="eyebrow cards__eyebrow">Четыре мысли</p>
+
+        <div class="slider" id="slider">
+          <ul class="slider__track" id="sliderTrack">
+
+            <li class="slide" data-index="0">
+              <article class="card">
+                <span class="card__watermark" aria-hidden="true">01</span>
+                <p class="card__number">01 <span>/ 04</span></p>
+                <h3 class="card__title">Впечатление</h3>
+                <p class="card__text">Есть люди, которых замечаешь сразу. А есть люди, которых потом ещё долго не можешь перестать замечать.</p>
+              </article>
+            </li>
+
+            <li class="slide" data-index="1">
+              <article class="card">
+                <span class="card__watermark" aria-hidden="true">02</span>
+                <p class="card__number">02 <span>/ 04</span></p>
+                <h3 class="card__title">Улыбка</h3>
+                <p class="card__text">У тебя какая-то подозрительно сильная способность делать обычный день значительно приятнее.</p>
+              </article>
+            </li>
+
+            <li class="slide" data-index="2">
+              <article class="card">
+                <span class="card__watermark" aria-hidden="true">03</span>
+                <p class="card__number">03 <span>/ 04</span></p>
+                <h3 class="card__title">Взгляд</h3>
+                <p class="card__text">Иногда человеку вообще ничего не нужно говорить. Достаточно одного взгляда.</p>
+              </article>
+            </li>
+
+            <li class="slide" data-index="3">
+              <article class="card card--last">
+                <span class="card__watermark" aria-hidden="true">04</span>
+                <p class="card__number">04 <span>/ 04</span></p>
+                <h3 class="card__title">И самое главное</h3>
+                <p class="card__text">Мне просто нравится, что <em>ты — это ты.</em></p>
+              </article>
+            </li>
+
+          </ul>
+        </div>
+
+        <div class="slider__nav">
+          <button class="icon-btn" id="prevCard" type="button" aria-label="Предыдущая мысль">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M15 5 8 12l7 7" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+
+          <div class="dots" id="dots" role="tablist" aria-label="Навигация по мыслям"></div>
+
+          <button class="icon-btn" id="nextCard" type="button" aria-label="Следующая мысль">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+
+        <p class="slider__hint" id="sliderHint" role="status" aria-live="polite">дальше — последнее</p>
+
+      </div>
+    </section>
+
+
+    <!-- ══════════════ ЭКРАН 4 · ФИНАЛ ══════════════ -->
+    <section class="screen screen--final" id="screen-final" aria-label="Финал" hidden inert>
+      <div class="screen__inner">
+        <div class="final">
+          <p class="eyebrow">One last thing · 04</p>
+          <p class="final__ps">P.S.</p>
+
+          <h2 class="display display--final">
+            Ты наверняка<br>
+            <em>уже догадалась.</em>
+          </h2>
+
+          <p class="final__line">Это всё было для тебя, Ульяна.</p>
+
+          <p class="signature">
+            От человека,<br>
+            которому ты очень сильно понравилась. <span class="signature__heart" aria-hidden="true">♥</span>
+          </p>
+
+          <button class="btn btn--ghost" id="restart" type="button">
+            <span>Прочитать ещё раз</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
